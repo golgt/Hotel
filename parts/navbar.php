@@ -87,7 +87,7 @@ include 'functions.php';
                 <div class="col-lg-2">
                     <div class="logo">
                         <a href="./index.php">
-                            <img src="img/logo.png" alt="">
+                            <img src="img/logoNEW.png" alt="">
                         </a>
                     </div>
                 </div>

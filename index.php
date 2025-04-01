@@ -14,15 +14,14 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="hero-text">
-                        <h1>Sona A Luxury Hotel</h1>
-                        <p>Here are the best hotel booking sites, including recommendations for international
-                            travel and for finding low-priced hotel rooms.</p>
+                        <h1>U Ovečky luxus ako nikde inde</h1>
+                        <p>Nachádzajú sa tu najlepšie ponuky izieb rovnako aj typy na výlety v blízkom okolí ale aj v zahraničí.</p>
                         <a href="#" class="primary-btn">Discover Now</a>
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                     <div class="booking-form">
-                        <h3>Booking Your Hotel</h3>
+                        <h3>Zarezervujte si hotel</h3>
                         <form action="#">
                             <div class="check-date">
                                 <label for="date-in">Check In:</label>
@@ -35,20 +34,20 @@
                                 <i class="icon_calendar"></i>
                             </div>
                             <div class="select-option">
-                                <label for="guest">Guests:</label>
+                                <label for="guest">Návševníci:</label>
                                 <select id="guest">
-                                    <option value="">2 Adults</option>
-                                    <option value="">3 Adults</option>
+                                    <option value="">2 Dospelí</option>
+                                    <option value="">3 Dospelí</option>
                                 </select>
                             </div>
                             <div class="select-option">
-                                <label for="room">Room:</label>
+                                <label for="room">Izba:</label>
                                 <select id="room">
-                                    <option value="">1 Room</option>
-                                    <option value="">2 Room</option>
+                                    <option value="">1 Izba</option>
+                                    <option value="">2 Izby</option>
                                 </select>
                             </div>
-                            <button type="submit">Check Availability</button>
+                            <button type="submit">Zistiť dostupnosť</button>
                         </form>
                     </div>
                 </div>
@@ -69,8 +68,8 @@
                 <div class="col-lg-6">
                     <div class="about-text">
                         <div class="section-title">
-                            <span>About Us</span>
-                            <h2>Intercontinental LA <br />Westlake Hotel</h2>
+                            <span>O nás</span>
+                            <h2>Hotel<br /> krásnych Alpách</h2>
                         </div>
                         <p class="f-para">Sona.com is a leading online accommodation site. We’re passionate about
                             travel. Every day, we inspire and reach millions of travelers across 90 local websites in 41
@@ -103,8 +102,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <span>What We Do</span>
-                        <h2>Discover Our Services</h2>
+                        <span>Čo ešte ponúkame</span>
+                        <h2>Objavte Naše Služby</h2>
                     </div>
                 </div>
             </div>
@@ -112,49 +111,43 @@
                 <div class="col-lg-4 col-sm-6">
                     <div class="service-item">
                         <i class="flaticon-036-parking"></i>
-                        <h4>Travel Plan</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna.</p>
+                        <h4>Plán cestovania</h4>
+                        <p>Ponúkneme Vám jedinečné návrhy na výlety či v blízkom oklolí alebo aj v zahraničí.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <div class="service-item">
                         <i class="flaticon-033-dinner"></i>
                         <h4>Catering Service</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna.</p>
+                        <p>Potrebujete miestnosť na oslavu? U nás nájdete tie najlepšie vybavené miestnosti spolu s službou v cene.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <div class="service-item">
                         <i class="flaticon-026-bed"></i>
                         <h4>Babysitting</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna.</p>
+                        <p>Ak si chcete vychutnať príjemný večer spolu a nemáte kam dať dieťa? Nebojte sa a zvyšok nechajte na nás.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <div class="service-item">
                         <i class="flaticon-024-towel"></i>
-                        <h4>Laundry</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna.</p>
+                        <h4>Práčovňa</h4>
+                        <p>Potrebujete niečo rýchlo vyprať? Odovzdajte nám to na recepcií a do pár hodín budete mať u Vás na izbe čisté oblečenie.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <div class="service-item">
                         <i class="flaticon-044-clock-1"></i>
-                        <h4>Hire Driver</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna.</p>
+                        <h4>Súkromný šofér</h4>
+                        <p>Súkromný šofér v našom hoteli je jedna z najlepších služieb čo ponúkame. Stačí zavolat a máte vlastného šoféra s luxusným autom.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <div class="service-item">
                         <i class="flaticon-012-cocktail"></i>
                         <h4>Bar & Drink</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna.</p>
+                        <p>Máme jeden z najlepšie vybavených barov v širokom oklolí. Naši kvalitný barmani Vám urobia akýkoľvek drink ktorý si budete želať.</p>
                     </div>
                 </div>
             </div>
