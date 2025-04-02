@@ -36,7 +36,7 @@ html, body {
 	height: 100%;
 	font-family: "Cabin", sans-serif;
 	-webkit-font-smoothing: antialiased;
-	-font-smoothing: antialiased;
+	font-smoothing: antialiased;
 }
 h1, h2, h3, h4, h5, h6 {
 	margin: 0;
@@ -640,7 +640,7 @@ ul, ol {
 	margin-right: 0;
 }
 .hero-slider .owl-stage-outer, .hero-slider .owl-stage, .hero-slider .owl-item, .hero-slider .hs-item {
-	max-height: 50% !important;
+	height: 100%;
 }
 /*---------------------
   About US
