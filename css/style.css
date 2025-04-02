@@ -640,7 +640,7 @@ ul, ol {
 	margin-right: 0;
 }
 .hero-slider .owl-stage-outer, .hero-slider .owl-stage, .hero-slider .owl-item, .hero-slider .hs-item {
-	height: 100%;
+	max-height: 50% !important;
 }
 /*---------------------
   About US
