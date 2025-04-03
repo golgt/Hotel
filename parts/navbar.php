@@ -17,15 +17,14 @@ include 'functions.php';
     <div class="header-configure-area">
         <div class="language-option">
             <img src="img/flag.jpg" alt="">
-            <span>EN <i class="fa fa-angle-down"></i></span>
+            <span>SK <i class="fa fa-angle-down"></i></span>
             <div class="flag-dropdown">
                 <ul>
-                    <li><a href="#">Zi</a></li>
-                    <li><a href="#">Fr</a></li>
+                    <li><a href="#">EN</a></li>
                 </ul>
             </div>
         </div>
-        <a href="#" class="bk-btn">Booking Now</a>
+        <a href="#" class="bk-btn">Rezervujte teraz</a>
     </div>
     
     <nav class="mainmenu mobile-menu">
@@ -41,7 +40,7 @@ include 'functions.php';
     </div>
     <ul class="top-widget">
         <li><i class="fa fa-phone"></i> (12) 345 67890</li>
-        <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
+        <li><i class="fa fa-envelope"></i> martin.ovcarcik@student.ukf.sk</li>
     </ul>
 </div>
 <!-- Offcanvas Menu Section End -->
@@ -54,7 +53,7 @@ include 'functions.php';
                 <div class="col-lg-6">
                     <ul class="tn-left">
                         <li><i class="fa fa-phone"></i> (12) 345 67890</li>
-                        <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
+                        <li><i class="fa fa-envelope"></i> martin.ovcarcik@student.ukf.sk</li>
                     </ul>
                 </div>
                 <div class="col-lg-6">
@@ -65,14 +64,13 @@ include 'functions.php';
                             <a href="#"><i class="fa fa-tripadvisor"></i></a>
                             <a href="#"><i class="fa fa-instagram"></i></a>
                         </div>
-                        <a href="#" class="bk-btn">Booking Now</a>
+                        <a href="#" class="bk-btn"> Rezervujte teraz</a>
                         <div class="language-option">
                             <img src="img/flag.jpg" alt="">
-                            <span>EN <i class="fa fa-angle-down"></i></span>
+                            <span>SK <i class="fa fa-angle-down"></i></span>
                             <div class="flag-dropdown">
                                 <ul>
-                                    <li><a href="#">Zi</a></li>
-                                    <li><a href="#">Fr</a></li>
+                                    <li><a href="#">EN</a></li>
                                 </ul>
                             </div>
                         </div>

@@ -19,10 +19,10 @@
                     <div class="about-pic">
                         <div class="row">
                             <div class="col-sm-6">
-                                <img src="img/about/about-1NEW.jpg" alt="">
+                                <img src="img/about/about-1NEWer.jpg" alt="">
                             </div>
                             <div class="col-sm-6">
-                                <img src="img/about/about-2.jpg" alt="">
+                                <img src="img/about/about-2NEW.jpg" alt="">
                             </div>
                         </div>
                     </div>

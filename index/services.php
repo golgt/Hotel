@@ -41,7 +41,7 @@
                     <div class="service-item">
                         <i class="flaticon-044-clock-1"></i>
                         <h4>Súkromný šofér</h4>
-                        <p>Súkromný šofér v našom hoteli je jedna z najlepších služieb čo ponúkame. Stačí zavolat a máte vlastného šoféra s luxusným autom.</p>
+                        <p>Súkromný šofér v našom hoteli je jedna z najlepších služieb čo ponúkame. Stačí zavolať a máte vlastného šoféra s luxusným autom.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-6">

@@ -28,10 +28,6 @@
     <?php include_once "index/testimonial.php"?>
     <!-- Testimonial Section End -->
 
-    <!-- Blog Section Begin -->
-   <?php include_once "index/blog_section.php"?>
-    <!-- Blog Section End -->
-
     <?php include_once "parts/footer.php"?>
 
     <!-- Search model Begin -->
