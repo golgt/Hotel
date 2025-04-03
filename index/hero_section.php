@@ -44,7 +44,7 @@
         </div>
         <div class="hero-slider owl-carousel">
             <div class="hs-item set-bg" data-setbg="img/hero/hero-1NEWer.png"></div>
-            <div class="hs-item set-bg" data-setbg="img/hero/hero-2NEW.jpg"></div>
+            <div class="hs-item set-bg" data-setbg="img/hero/hero-2NEWer.png"></div>
             <div class="hs-item set-bg" data-setbg="img/hero/hero-3NEW.jpg"></div>
         </div>
     </section>
