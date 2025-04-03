@@ -27,13 +27,16 @@
                                 <select id="guest">
                                     <option value="">2 Dospelí</option>
                                     <option value="">3 Dospelí</option>
+                                    <option value="">2 Dospelí, 2 Deti</option>
                                 </select>
                             </div>
                             <div class="select-option">
                                 <label for="room">Izba:</label>
                                 <select id="room">
-                                    <option value="">1 Izba</option>
-                                    <option value="">2 Izby</option>
+                                <option value="">Bačovský apartmán</option>
+                                <option value="">Kráľovský apartmán</option>
+                                <option value="">Cisársky apartmán</option>
+                                <option value="">Rodinný apartmán</option>
                                 </select>
                             </div>
                             <button type="submit">Zistiť dostupnosť</button>
@@ -45,6 +48,6 @@
         <div class="hero-slider owl-carousel">
             <div class="hs-item set-bg" data-setbg="img/hero/hero-1NEWer.png"></div>
             <div class="hs-item set-bg" data-setbg="img/hero/hero-2NEWer.png"></div>
-            <div class="hs-item set-bg" data-setbg="img/hero/hero-3NEW.jpg"></div>
+            <div class="hs-item set-bg" data-setbg="img/hero/hero-3NEWer.png"></div>
         </div>
     </section>

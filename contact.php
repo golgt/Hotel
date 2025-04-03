@@ -14,22 +14,22 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="contact-text">
-                        <h2>Contact Info</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua.</p>
+                        <h2>Kontaktné Informácie</h2>
+                        <p>Ak sa Vám pobyt u nás páčil alebo nie určite budeme radi za každfú správu čo nám tu zanecháte.
+                            Podľa Vašich pocitov sa pokúsime upraviť služby kroré ponúkame. </p>
                         <table>
                             <tbody>
                                 <tr>
-                                    <td class="c-o">Address:</td>
+                                    <td class="c-o">Adresa:</td>
                                     <td>856 Cordia Extension Apt. 356, Lake, US</td>
                                 </tr>
                                 <tr>
-                                    <td class="c-o">Phone:</td>
+                                    <td class="c-o">Telefón:</td>
                                     <td>(12) 345 67890</td>
                                 </tr>
                                 <tr>
                                     <td class="c-o">Email:</td>
-                                    <td>info.colorlib@gmail.com</td>
+                                    <td>martin.ovcarcik@student.ukf.sk</td>
                                 </tr>
                                 <tr>
                                     <td class="c-o">Fax:</td>
@@ -40,17 +40,17 @@
                     </div>
                 </div>
                 <div class="col-lg-7 offset-lg-1">
-                    <form action="#" class="contact-form">
+                    <form action="db/spracovanieFormulara.php" method="post" class="contact-form">
                         <div class="row">
                             <div class="col-lg-6">
-                                <input type="text" placeholder="Your Name">
+                                <input type="text" name="meno" placeholder="Vaše Meno">
                             </div>
                             <div class="col-lg-6">
-                                <input type="text" placeholder="Your Email">
+                                <input type="text" name="email" placeholder="váš Email">
                             </div>
                             <div class="col-lg-12">
-                                <textarea placeholder="Your Message"></textarea>
-                                <button type="submit">Submit Now</button>
+                                <textarea name="sprava" placeholder="Vaša Správa"></textarea>
+                                <button type="submit">Odoslať</button>
                             </div>
                         </div>
                     </form>

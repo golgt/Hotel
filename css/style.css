@@ -751,6 +751,7 @@ ul, ol {
 .hp-room-items .hp-room-item .hr-text h3 {
 	color: #ffffff;
 	margin-bottom: 15px;
+	text-shadow: 8px 4px 7px black;
 }
 .hp-room-items .hp-room-item .hr-text h2 {
 	color: #dfa974;
