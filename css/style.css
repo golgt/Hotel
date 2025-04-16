@@ -36,7 +36,7 @@ html, body {
 	height: 100%;
 	font-family: "Cabin", sans-serif;
 	-webkit-font-smoothing: antialiased;
-	font-smoothing: antialiased;
+	/*font-smoothing: antialiased;*/
 }
 h1, h2, h3, h4, h5, h6 {
 	margin: 0;
@@ -751,6 +751,7 @@ ul, ol {
 .hp-room-items .hp-room-item .hr-text h3 {
 	color: #ffffff;
 	margin-bottom: 15px;
+	text-shadow: 8px 4px 7px black;
 }
 .hp-room-items .hp-room-item .hr-text h2 {
 	color: #dfa974;
@@ -773,6 +774,7 @@ ul, ol {
 	font-size: 16px;
 	color: #ffffff;
 	line-height: 36px;
+	text-shadow: 8px 4px 7px black;
 }
 .hp-room-items .hp-room-item .hr-text table tbody tr td.r-o {
 	width: 120px;
