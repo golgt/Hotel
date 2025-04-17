@@ -16,16 +16,6 @@
             "submenu": []
         },
         {
-            "name": "Stránky",
-            "url": "#",
-            "submenu": [
-                {"name": "Detaily izby", "url": "./room-details.php"},
-                {"name": "Blog detaily", "url": "./blog-details.php"},
-                {"name": "Rodinná izba", "url": "#"},
-                {"name": "Prémiová izba", "url": "#"}
-            ]
-        },
-        {
             "name": "Novinky",
             "url": "./blog.php",
             "submenu": []

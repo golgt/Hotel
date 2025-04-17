@@ -24,7 +24,7 @@ class Kontakt{
         }
     }
     public function ulozitSpravu($meno, $email, $sprava){               //public metoda prijíma meno,email,sprava kde sa vytvory SQL dotaz na vlozenie do db
-        $sql = "INSERT INTO kontakt (meno,email,sprava) VALUE ('" . $meno . "', '" . $email . "', '" . $sprava . "')";
+        $sql = "INSERT INTO spravy (meno,email,sprava) VALUE ('" . $meno . "', '" . $email . "', '" . $sprava . "')";
         $statement = $this->conn->prepare($sql);
         try{
             $insert = $statement->execute();
