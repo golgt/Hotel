@@ -20,8 +20,7 @@
         die("DB Connection failed: " . $e->getMessage());
     }
 
-    // ❌ CHYBA bola tu: "FORM" → má byť "FROM"
-    $stmt = $pdo->query("SELECT * FROM rooms");
+    $stmt = $pdo->query("SELECT * FROM rooms");                      //načítavanie z databázy
 
     $rooms = [];
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {

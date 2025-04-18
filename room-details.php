@@ -1,4 +1,4 @@
-<?php include_once "parts/header.php";?>
+<?php include_once "parts/header.php"; ?>
 
 <body>
     <!-- Page Preloder -->
@@ -6,187 +6,130 @@
         <div class="loader"></div>
     </div>
 
-    <?php include_once "parts/navbar.php";?>
+    <?php include_once "parts/navbar.php"; ?>
 
-    <!-- Breadcrumb Section Begin -->
-    <div class="breadcrumb-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb-text">
-                        <h2>Our Rooms</h2>
-                        <div class="bt-option">
-                            <a href="./home.html">Home</a>
-                            <span>Rooms</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcrumb Section End -->
+    <?php 
+    require_once "classes/Room.php";
 
-    <!-- Room Details Section Begin -->
+    try {
+        $pdo = new PDO("mysql:host=localhost;dbname=hotel_u_ovesky;charset=utf8", "root", "", [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION  //pripojenie k databaze
+        ]);
+    } catch (PDOException $e) {
+        die("Pripojenie s databázou zlyhalo" . $e->getMessage());
+    }
+    if(!isset($_GET['id'])) {
+        die("Neplatne ID izby");
+    }
+
+    $id = (int)$_GET['id'];
+
+    // Načítanie údajov o izbe
+    $stmt = $pdo->prepare("SELECT * FROM rooms WHERE id = ?");
+    $stmt->execute([$id]);
+
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if(!$row){
+        die("Izba nebola nájdená.");
+    }
+
+    $room = new Room($row);
+
+    // Načítanie recenzií pre túto izbu
+    $stmt = $pdo->prepare("SELECT * FROM reviews WHERE room_id = ? ORDER BY created_at DESC");
+    $stmt->execute([$id]);
+    $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    ?>
+
     <section class="room-details-section spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <div class="room-details-item">
-                        <img src="img/room/room-details.jpg" alt="">
-                        <div class="rd-text">
-                            <div class="rd-title">
-                                <h3>Premium King Room</h3>
-                                <div class="rdt-right">
-                                    <div class="rating">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star-half_alt"></i>
-                                    </div>
-                                    <a href="#">Booking Now</a>
-                                </div>
-                            </div>
-                            <h2>159$<span>/Pernight</span></h2>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td class="r-o">Size:</td>
-                                        <td>30 ft</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Capacity:</td>
-                                        <td>Max persion 5</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Bed:</td>
-                                        <td>King Beds</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Services:</td>
-                                        <td>Wifi, Television, Bathroom,...</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <p class="f-para">Motorhome or Trailer that is the question for you. Here are some of the
-                                advantages and disadvantages of both, so you will be confident when purchasing an RV.
-                                When comparing Rvs, a motorhome or a travel trailer, should you buy a motorhome or fifth
-                                wheeler? The advantages and disadvantages of both are studied so that you can make your
-                                choice wisely when purchasing an RV. Possessing a motorhome or fifth wheel is an
-                                achievement of a lifetime. It can be similar to sojourning with your residence as you
-                                search the various sites of our great land, America.</p>
-                            <p>The two commonly known recreational vehicle classes are the motorized and towable.
-                                Towable rvs are the travel trailers and the fifth wheel. The rv travel trailer or fifth
-                                wheel has the attraction of getting towed by a pickup or a car, thus giving the
-                                adaptability of possessing transportation for you when you are parked at your campsite.
-                            </p>
-                        </div>
-                    </div>
+                    <?php $room->renderDetail(); ?>
+                </div>
+
+                <!-- Pravý panel na rezerváciu -->
+                <div class="col-lg-4">
+                    <?php 
+                    $sidebarRoom = $room;
+                    include "parts/room-sidebar.php"; 
+                    ?>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="room-details-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
                     <div class="rd-reviews">
-                        <h4>Reviews</h4>
-                        <div class="review-item">
-                            <div class="ri-pic">
-                                <img src="img/room/avatar/avatar-1.jpg" alt="">
-                            </div>
-                            <div class="ri-text">
-                                <span>27 Aug 2019</span>
-                                <div class="rating">
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star-half_alt"></i>
+                        <h4>Recenzie</h4>
+                        <?php if (count($reviews) > 0): ?>
+                            <?php foreach ($reviews as $review): ?>
+                                <div class="review-item">
+                                    <div class="ri-pic">
+                                        <img src="img/room/avatar/avatar-1.jpg" alt="">
+                                    </div>
+                                    <div class="ri-text">
+                                        <span><?= htmlspecialchars($review['created_at']); ?></span>
+                                        <div class="rating">
+                                            <?php 
+                                            // Zobrazenie hodnotenia ako hviezdičky
+                                            for ($i = 0; $i < 5; $i++) {
+                                                if ($i < $review['rating']) {
+                                                    echo '<i class="icon_star"></i>';
+                                                } else {
+                                                    echo '<i class="icon_star-half_alt"></i>';
+                                                }
+                                            }
+                                            ?>
+                                        </div>
+                                        <h5><?= htmlspecialchars($review['name']); ?></h5>
+                                        <p><?= htmlspecialchars($review['comment']); ?></p>
+                                    </div>
                                 </div>
-                                <h5>Brandon Kelley</h5>
-                                <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                    adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
-                                    magnam.</p>
-                            </div>
-                        </div>
-                        <div class="review-item">
-                            <div class="ri-pic">
-                                <img src="img/room/avatar/avatar-2.jpg" alt="">
-                            </div>
-                            <div class="ri-text">
-                                <span>27 Aug 2019</span>
-                                <div class="rating">
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star-half_alt"></i>
-                                </div>
-                                <h5>Brandon Kelley</h5>
-                                <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                    adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
-                                    magnam.</p>
-                            </div>
-                        </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <p>Žiadne recenzie zatiaľ neboli pridané.</p>
+                        <?php endif; ?>
                     </div>
+                    
                     <div class="review-add">
-                        <h4>Add Review</h4>
-                        <form action="#" class="ra-form">
+                        <h4>Pridať recenziu</h4>
+                        <form action="db/spracovanieReviews.php" method="post" class="contact-form">
+                            <input type="hidden" name="room_id" value="<?= $room->id ?>"> <!-- Pridáme ID izby -->
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <input type="text" placeholder="Name*">
+                                    <input type="text" name="name" placeholder="Vaše Meno" required>
                                 </div>
                                 <div class="col-lg-6">
-                                    <input type="text" placeholder="Email*">
-                                </div>
-                                <div class="col-lg-12">
-                                    <div>
-                                        <h5>You Rating:</h5>
-                                        <div class="rating">
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star-half_alt"></i>
-                                        </div>
-                                    </div>
-                                    <textarea placeholder="Your Review"></textarea>
-                                    <button type="submit">Submit Now</button>
+                                    <input type="email" name="email" placeholder="Váš Email" required>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="room-booking">
-                        <h3>Your Reservation</h3>
-                        <form action="#">
-                            <div class="check-date">
-                                <label for="date-in">Check In:</label>
-                                <input type="text" class="date-input" id="date-in">
-                                <i class="icon_calendar"></i>
+                            <div class="col-lg-12">
+                                <div>
+                                    <h5>Vaše hodnotenie:</h5>
+                                    <select name="rating" required>
+                                        <option value="5">★★★★★</option>
+                                        <option value="4">★★★★☆</option>
+                                        <option value="3">★★★☆☆</option>
+                                        <option value="2">★★☆☆☆</option>
+                                        <option value="1">★☆☆☆☆</option>
+                                    </select>
+                                </div>
+                                <textarea name="comment" placeholder="Vaša recenzia" required></textarea>
+                                <button type="submit">Odoslať</button>
                             </div>
-                            <div class="check-date">
-                                <label for="date-out">Check Out:</label>
-                                <input type="text" class="date-input" id="date-out">
-                                <i class="icon_calendar"></i>
-                            </div>
-                            <div class="select-option">
-                                <label for="guest">Guests:</label>
-                                <select id="guest">
-                                    <option value="">3 Adults</option>
-                                </select>
-                            </div>
-                            <div class="select-option">
-                                <label for="room">Room:</label>
-                                <select id="room">
-                                    <option value="">1 Room</option>
-                                </select>
-                            </div>
-                            <button type="submit">Check Availability</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Room Details Section End -->
 
-    <?php include_once "parts/footer.php";?>
+    <?php include_once "parts/footer.php"; ?>
 
     <!-- Search model Begin -->
     <div class="search-model">
