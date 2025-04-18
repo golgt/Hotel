@@ -72,7 +72,7 @@
         autoplay: true,
         mouseDrag: false
     });
-
+    
     /*------------------------
 		Testimonial Slider
     ----------------------- */
