@@ -32,7 +32,7 @@ class Reservation{
         if ($row){
             $nextDate = new DateTime($row['end_date']);
             $nextDate->modify('+1 day');
-            return $nextDate->format('Y-m-d');
+            return $nextDate->format('d.m.Y');
         }
         return null;
     }

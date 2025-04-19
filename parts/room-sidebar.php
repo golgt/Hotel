@@ -6,13 +6,13 @@ $room = $sidebarRoom ?? null;
     <form id="availability-form">
         <div class="check-date">
             <label for="date-in">Check In:</label>                                       <!--kalendar prichodu a odchodu--> 
-            <input type="text" class="date-input" id="date-in" required>
-            <i class="icon_calendar"></i>
+            <input type="date"  id="date-in" required>
+            
         </div>
         <div class="check-date">
             <label for="date-out">Check Out:</label>
-            <input type="text" class="date-input" id="date-out" required>
-            <i class="icon_calendar"></i>
+            <input type="date"  id="date-out" required>
+            
         </div>
         <div class="select-option">
             <label for="guest">Hostia:</label>

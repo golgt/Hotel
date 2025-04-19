@@ -1,5 +1,5 @@
 <?php 
-require_once "../classes/Reservation.php";
+require_once "../classes/ReservationCheck.php";
 
 $pdo = new PDO("mysql:host=localhost;dbname=hotel_u_ovesky;charset=utf8","root","",[
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION                                                                          //pripaja k databaze  
@@ -9,7 +9,7 @@ $reservation = new Reservation($pdo);
 
 $roomId = (int)$_POST['room_id'];
 $checkIn = $_POST['check_in'];
-$checkOut = $_post['check_out'];
+$checkOut = $_POST['check_out'];
 
 header("Content-Type: application/json");
 

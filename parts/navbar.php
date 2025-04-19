@@ -64,7 +64,7 @@ include 'functions.php';
                             <a href="#"><i class="fa fa-tripadvisor"></i></a>
                             <a href="#"><i class="fa fa-instagram"></i></a>
                         </div>
-                        <a href="#" class="bk-btn"> Rezervujte teraz</a>
+                        <a href="./reservations.php" class="bk-btn"> Rezervujte teraz</a>
                         <div class="language-option">
                             <img src="img/flag.jpg" alt="">
                             <span>SK <i class="fa fa-angle-down"></i></span>
