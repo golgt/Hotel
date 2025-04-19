@@ -1,0 +1,29 @@
+{
+    "menu":[
+        {
+            "name": "Domov",
+            "url": "./index.php",
+            "submenu": []
+        },
+        {
+            "name": "Izby",
+            "url": "./rooms.php",
+            "submenu": [] 
+        },
+        {
+            "name": "O nás",
+            "url": "./about-us.php",
+            "submenu": []
+        },
+        {
+            "name": "Novinky",
+            "url": "./blog.php",
+            "submenu": []
+        },
+        {
+            "name": "Kontakt",
+            "url": "./contact.php",
+            "submenu": []
+        }
+    ]
+}
