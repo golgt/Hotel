@@ -51,7 +51,7 @@ class Room {
                         <i class="icon_star"></i>
                         <i class="icon_star-half_alt"></i>
                     </div>
-                    <a href="#">Zarezervovať</a>
+                    <a href="reservations.php">Zarezervovať</a>
                 </div>
             </div>
             <h2>' . htmlspecialchars($this->price) . '€<span>/noc</span></h2>

@@ -67,7 +67,7 @@
                     <div class="rd-reviews">
                         <h4>Recenzie</h4>
                         <?php if (count($reviews) > 0): ?>
-                            <?php foreach ($reviews as $review): ?>
+                            <?php foreach ($reviews as $review): ?>                      <!--prehladava databazu s recenizami a nasledne ich vypise aj s datumom a hodnotenim-->
                                 <div class="review-item">
                                     <div class="ri-pic">
                                         <img src="img/room/avatar/avatar-1.jpg" alt="">
