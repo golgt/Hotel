@@ -18,7 +18,8 @@ class Review{
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         );
         try{
-            $this->conn = new PDO('mysql:hosts=' . $config['HOST'] . ';dbname=' .$config['DBNAME'] . ';port=' . $config['PORT'], $config['USER_NAME'], $config['PASSWORD'], $options);
+            $this->conn = new PDO('mysql:hosts=' . $config['HOST'] . ';dbname=' .$config['DBNAME'] . ';port=' . $config['PORT'],
+  $config['USER_NAME'], $config['PASSWORD'], $options);
         }catch(PDOException $e){
             die("Chyba pripojenia: " . $e->getMessage());
         }
