@@ -65,6 +65,11 @@ include 'functions.php';
                             <a href="#"><i class="fa fa-instagram"></i></a>
                         </div>
                         <a href="./reservations.php" class="bk-btn"> Rezervujte teraz</a>
+                        <?php if (isset($_SESSION['user_id'])): ?>
+                            <a href="profile.php" class="bk-btn">Profil</a> <!-- Odkaz na profil -->
+                        <?php else: ?>
+                            <a href="login.php" class="bk-btn">Prihlásenie</a>
+                        <?php endif; ?>
                         <div class="language-option">
                             <img src="img/flag.jpg" alt="">
                             <span>SK <i class="fa fa-angle-down"></i></span>

@@ -16,6 +16,7 @@ $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?php include_once "parts/navbar.php"; ?>
 
 <div class="room-booking">
+    <div class="container">
     <h3>Vyplňte svoju rezerváciu</h3>
     <form id="reservation-form">
         
@@ -70,6 +71,7 @@ $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </form>
 
     <div id="result-message" style="margin-top: 10px;"></div>
+  </div>
 </div>
 
 <!-- Dynamické generovanie počtu osôb -->

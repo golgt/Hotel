@@ -127,7 +127,6 @@ ul, ol {
 .primary-btn {
 	display: inline-block;
 	font-size: 13px;
-	color: #ffffff;
 	text-transform: uppercase;
 	letter-spacing: 2px;
 	font-weight: 700;
@@ -1357,7 +1356,6 @@ ul, ol {
 }
 .review-add h4 {
 	color: #19191a;
-	letter-spacing: 1px;
 	margin-bottom: 45px;
 }
 .review-add .ra-form input {
