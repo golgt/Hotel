@@ -1,4 +1,6 @@
-<?php include_once "parts/header.php"; ?>
+<?php include_once "parts/header.php"; 
+    session_start();
+?>
 
 <body>
     <!-- Page Preloader -->

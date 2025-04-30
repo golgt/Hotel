@@ -1,4 +1,29 @@
-<?php include_once "parts/header.php"; ?>
+<?php 
+include_once "parts/header.php"; 
+session_start();
+
+$user = null;
+
+try {
+    $pdo = new PDO("mysql:host=localhost;dbname=hotel_u_ovesky;charset=utf8", "root", "", [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+    ]);
+} catch (PDOException $e) {
+    die("Pripojenie s databázou zlyhalo: " . $e->getMessage());
+}
+
+// Teraz už môžeš bezpečne načítať používateľa
+if (isset($_SESSION['user_id'])) {
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
+        $stmt->execute([$_SESSION['user_id']]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        $user = null;
+    }
+}
+?>
+
 
 <body>
     <!-- Page Preloder -->
@@ -70,7 +95,15 @@
                             <?php foreach ($reviews as $review): ?>                      <!--prehladava databazu s recenizami a nasledne ich vypise aj s datumom a hodnotenim-->
                                 <div class="review-item">
                                     <div class="ri-pic">
-                                        <img src="img/room/avatar/avatar-1.jpg" alt="">
+                                        <?php
+                                        if($user && $user['gender'] === 'female'){
+                                            $defaultImage = 'img/room/avatar/avatar-2.jpg';
+                                        } else {
+                                            $defaultImage = "img/room/avatar/avatar-1.jpg";
+                                        }
+                                        
+                                        ?>
+                                        <img src="<?= htmlspecialchars($defaultImage) ?>" alt="">
                                     </div>
                                     <div class="ri-text">
                                         <span><?= htmlspecialchars($review['created_at']); ?></span>
@@ -98,6 +131,8 @@
                     
                     <div class="review-add">
                         <h4>Pridať recenziu</h4>
+
+                        <?php if (isset($_SESSION['user_id'])): ?>
                         <form action="db/spracovanieReviews.php" method="post" class="contact-form">
                             <input type="hidden" name="room_id" value="<?= $room->id ?>"> <!-- Pridáme ID izby -->
                             <div class="row">
@@ -123,6 +158,9 @@
                                 <button type="submit">Odoslať</button>
                             </div>
                         </form>
+                        <?php else: ?>
+                            <p>Ak chcete pridať recenziu <a href="login.php">prihláste sa</a>.</p>
+                        <?php endif;?>
                     </div>
                 </div>
             </div>

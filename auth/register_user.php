@@ -17,9 +17,11 @@ try {
     $lastname = trim($_POST['lastname'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
+    $gender = $_POST['gendewr'] ?? '';
+    
 
     // Validácia údajov
-    if (empty($name) || empty($lastname) || empty($email) || empty($password)) {
+    if (empty($name) || empty($lastname) || empty($email) || empty($password) || empty($gender)) {
         header("Location: ../registration.php?error=Vyplňte všetky polia");
         exit();
     }
@@ -48,8 +50,8 @@ try {
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
     // Vloženie nového používateľa do databázy
-    $stmt = $pdo->prepare("INSERT INTO users (name, lastname, email, password, loyalty_points) VALUES (?, ?, ?, ?, 10)");
-    $stmt->execute([$name, $lastname, $email, $password_hash]);
+    $stmt = $pdo->prepare("INSERT INTO users (name, lastname, email, password, loyalty_points, gender) VALUES (?, ?, ?, ?, 10, ?)");
+    $stmt->execute([$name, $lastname, $email, $password_hash,$gender]);
 
     // Získanie ID novovytvoreného používateľa
     $user_id = $pdo->lastInsertId();

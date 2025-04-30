@@ -36,6 +36,14 @@ include_once "parts/header.php";
                                 <label for="lastname">Priezvisko:</label>
                                 <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Zadajte priezvisko" required>
                             </div>
+                            <div class="form-group mb-3">
+                                <label for="gender" class="form-label">Pohlavie:</label><br>
+                                <select name="gender" id="gender" class="form-control" required>
+                                    <option value="" disabled selected>-- Vyberte pohlavie --</option>
+                                    <option value="male">Muž</option>
+                                    <option value="female">Žena</option>
+                                </select>
+                            </div><br><br>
                             
                             <div class="form-group mb-3">
                                 <label for="email">Email:</label>
