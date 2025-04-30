@@ -21,7 +21,7 @@ try {
     
 
     // Validácia údajov
-    if (empty($name) || empty($lastname) || empty($email) || empty($password) || empty($gender)) {
+    if (empty($name) || empty($lastname) || empty($email) || empty($password)) {
         header("Location: ../registration.php?error=Vyplňte všetky polia");
         exit();
     }

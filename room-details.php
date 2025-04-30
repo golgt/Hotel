@@ -96,12 +96,12 @@ if (isset($_SESSION['user_id'])) {
                                 <div class="review-item">
                                     <div class="ri-pic">
                                         <?php
-                                        if($user && $user['gender'] === 'female'){
-                                            $defaultImage = 'img/room/avatar/avatar-2.jpg';
+                                        // Kontrola pohlavia
+                                        if($user && isset($user['gender']) && $user['gender'] === 'female') {
+                                            $defaultImage = 'img/room/avatar/avatar-2.jpg'; // Obrázok pre ženy
                                         } else {
-                                            $defaultImage = "img/room/avatar/avatar-1.jpg";
+                                            $defaultImage = "img/room/avatar/avatar-1.jpg"; // Obrázok pre mužov
                                         }
-                                        
                                         ?>
                                         <img src="<?= htmlspecialchars($defaultImage) ?>" alt="">
                                     </div>

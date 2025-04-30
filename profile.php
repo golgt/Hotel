@@ -1,14 +1,16 @@
-<?php 
+<?php
 session_start();
 require_once 'db/config.php';
 
-// Kontrola prihlásenia
-if(!isset($_SESSION['user_id'])){
+// Debug výpis
+echo "Session ID: " . (isset($_SESSION['user_id']) ? $_SESSION['user_id'] : "Nie je nastavené") . "<br>";
+
+if (!isset($_SESSION['user_id'])) {
     header("Location: login.php?error=Musíte sa prihlásiť");
     exit();
 }
 
-try{
+try {
     // Pripojenie k databáze
     $pdo = new PDO("mysql:host=" . DATABASE['HOST'] . ";dbname=" . DATABASE['DBNAME'] . ";port=" . DATABASE['PORT'], DATABASE['USER_NAME'], DATABASE['PASSWORD'], [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -21,7 +23,10 @@ try{
     $user = $stmt->fetch();
 
     if (!$user) {
-        echo "Používateľ neexistuje";
+        // Ak používateľ neexistuje, zrušíme session a presmerujeme na prihlásenie
+        session_unset();
+        session_destroy();
+        header("Location: login.php?error=Používateľ neexistuje. Prihláste sa znovu.");
         exit();
     }
 } catch (PDOException $e) {

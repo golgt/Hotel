@@ -38,7 +38,7 @@ include_once "parts/header.php";
                             </div>
                             <div class="form-group mb-3">
                                 <label for="gender" class="form-label">Pohlavie:</label><br>
-                                <select name="gender" id="gender" class="form-control" required>
+                                <select name="gender" id="gender" class="form-control">
                                     <option value="" disabled selected>-- Vyberte pohlavie --</option>
                                     <option value="male">Muž</option>
                                     <option value="female">Žena</option>
