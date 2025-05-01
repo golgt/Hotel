@@ -16,10 +16,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2>About Us</h2>
+                        <h2>O nás</h2>
                         <div class="bt-option">
-                            <a href="./index.html">Home</a>
-                            <span>About Us</span>
+                            <a href="./index.php">Domov</a>
+                            <span>O nás</span>
                         </div>
                     </div>
                 </div>
@@ -35,19 +35,19 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="ap-title">
-                            <h2>Welcome To Sona.</h2>
-                            <p>Built in 1910 during the Belle Epoque period, this hotel is located in the center of
-                                Paris, with easy access to the city’s tourist attractions. It offers tastefully
-                                decorated rooms.</p>
+                            <h2>Vitajte U Ovesky.</h2>
+                            <p>Postavený v roku 1912 počas obdobia Belle Epoque, tento hotel sa nachádza
+                                v najkrajšej časti Francúzkych Álp. Ponúkame klasicky ale aj moderne vybavené apartmány.
+                            </p>
                         </div>
                     </div>
                     <div class="col-lg-5 offset-lg-1">
                         <ul class="ap-services">
-                            <li><i class="icon_check"></i> 20% Off On Accommodation.</li>
-                            <li><i class="icon_check"></i> Complimentary Daily Breakfast</li>
-                            <li><i class="icon_check"></i> 3 Pcs Laundry Per Day</li>
+                            <li><i class="icon_check"></i> Vernostný program na zisk bodov.</li>
+                            <li><i class="icon_check"></i> Kompletné Denné Raňajky</li>
+                            <li><i class="icon_check"></i> Luxusné služby v cene</li>
                             <li><i class="icon_check"></i> Free Wifi.</li>
-                            <li><i class="icon_check"></i> Discount 20% On F&B</li>
+                            <li><i class="icon_check"></i> Možnosť uplatniť body na zľavu</li>
                         </ul>
                     </div>
                 </div>
@@ -57,14 +57,14 @@
                     <div class="col-md-4">
                         <div class="ap-service-item set-bg" data-setbg="img/about/about-p1.jpg">
                             <div class="api-text">
-                                <h3>Restaurants Services</h3>
+                                <h3>Reštaurácie</h3>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="ap-service-item set-bg" data-setbg="img/about/about-p2.jpg">
                             <div class="api-text">
-                                <h3>Travel & Camping</h3>
+                                <h3>Cestovanie & Camping</h3>
                             </div>
                         </div>
                     </div>
@@ -87,9 +87,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="video-text">
-                        <h2>Discover Our Hotel & Services.</h2>
-                        <p>It S Hurricane Season But We Are Visiting Hilton Head Island</p>
-                        <a href="https://www.youtube.com/watch?v=EzKkl64rRbM" class="play-btn video-popup"><img
+                        <h2>Objavte Náš Hotel & Služby</h2>
+                        <p>Hotel Tour</p>
+                        <a href=https://www.youtube.com/watch?v=V2LpXOKWjus class="play-btn video-popup"><img
                                 src="img/play.png" alt=""></a>
                     </div>
                 </div>
@@ -104,39 +104,39 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <span>Our Gallery</span>
-                        <h2>Discover Our Work</h2>
+                        <span>Naša Galéria</span>
+                        <h2>Objavte náš Hotel</h2>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-6">
-                    <div class="gallery-item set-bg" data-setbg="img/gallery/gallery-1.jpg">
+                    <div class="gallery-item set-bg" data-setbg="img/gallery/gallery-1NEW.jpg">
                         <div class="gi-text">
-                            <h3>Room Luxury</h3>
+                            <h3>Profesionálny Personál</h3>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
-                            <div class="gallery-item set-bg" data-setbg="img/gallery/gallery-3.jpg">
+                            <div class="gallery-item set-bg" data-setbg="img/gallery/gallery-3NEW.jpg">
                                 <div class="gi-text">
-                                    <h3>Room Luxury</h3>
+                                    <h3>Luxusné Kúpele</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="gallery-item set-bg" data-setbg="img/gallery/gallery-4.jpg">
+                            <div class="gallery-item set-bg" data-setbg="img/gallery/gallery4NEW.jpg">
                                 <div class="gi-text">
-                                    <h3>Room Luxury</h3>
+                                    <h3>Vlastný šofér</h3>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="gallery-item large-item set-bg" data-setbg="img/gallery/gallery-2.jpg">
+                    <div class="gallery-item large-item set-bg" data-setbg="img/gallery/gallery-2NEW.jpg">
                         <div class="gi-text">
-                            <h3>Room Luxury</h3>
+                            <h3>Najkrajšie Prostredie</h3>
                         </div>
                     </div>
                 </div>

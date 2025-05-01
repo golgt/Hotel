@@ -1,5 +1,13 @@
 <?php include_once "parts/header.php";
     session_start();
+    $pdo = new PDO("mysql:host=localhost;dbname=hotel_u_ovesky;charset=utf8", "root", "", [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+    ]);
+    
+    // Načítanie izieb
+    $stmt = $pdo->prepare("SELECT id, name, capacity FROM rooms");
+    $stmt->execute();
+    $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <body>
@@ -18,42 +26,69 @@
                     <div class="hero-text">
                         <h1>U Ovečky luxus ako nikde inde</h1>
                         <p>Nachádzajú sa tu najlepšie ponuky izieb rovnako aj typy na výlety v blízkom okolí ale aj v zahraničí.</p>
-                        <a href="#" class="primary-btn">Discover Now</a>
+                        <a href="rooms.php" class="primary-btn">Discover Now</a>
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                     <div class="booking-form">
-                        <h3>Zarezervujte si hotel</h3>
-                        <form action="#">
-                            <div class="check-date">
-                                <label for="date-in">Check In:</label>
-                                <input type="text" class="date-input" id="date-in">
-                                <i class="icon_calendar"></i>
-                            </div>
-                            <div class="check-date">
-                                <label for="date-out">Check Out:</label>
-                                <input type="text" class="date-input" id="date-out">
-                                <i class="icon_calendar"></i>
-                            </div>
-                            <div class="select-option">
-                                <label for="guest">Návševníci:</label>
-                                <select id="guest">
-                                    <option value="">2 Dospelí</option>
-                                    <option value="">3 Dospelí</option>
-                                    <option value="">2 Dospelí, 2 Deti</option>
-                                </select>
-                            </div>
-                            <div class="select-option">
-                                <label for="room">Izba:</label>
-                                <select id="room">
-                                    <option value="">Bačovský apartmán</option>
-                                    <option value="">Kráľovský apartmán</option>
-                                    <option value="">Cisársky apartmán</option>
-                                    <option value="">Rodinný apartmán</option>
-                                </select>
-                            </div>
-                            <button type="submit">Zistiť dostupnosť</button>
-                        </form>
+                    <div class="room-booking">
+    <div class="container">
+    <h3>Zarezervujte si hotel</h3>
+    <form id="reservation-form">
+        
+        <!-- Výber izby -->
+        <div class="check-date">
+            <label for="room-select">Izba:</label>
+            <select id="room-select" name="room_id" required>
+                <option value="">-- Vyber izbu --</option>
+                <?php foreach ($rooms as $room): ?>
+                    <option value="<?= $room['id'] ?>" data-capacity="<?= intval(preg_replace('/\D/', '', $room['capacity'])) ?>">
+                        <?= htmlspecialchars($room['name']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <br>
+        <br>
+        <!-- Dátumy -->
+        <div class="check-date">
+            <label for="check-in">Check In:</label>
+            <input type="date" id="check-in" required>
+            
+        </div>
+        <div class="check-date">
+            <label for="check-out">Check Out:</label>
+            <input type="date" id="check-out"  required>
+            
+        </div>
+
+        <!-- Počet osôb -->
+        <div class="check-date">
+            <label for="guests">Počet osôb:</label>
+            <input type="numbre" id="guests"  placeholder="Počet osôb" required>
+        </div>
+        <!-- Osobné údaje -->
+        <div class="check-date">
+            <label for="name">Meno:</label>
+            <input type="text" id="name" placeholder="Meno" required>
+        </div>
+
+        <div class="check-date">
+            <label for="surname">Priezvisko:</label>
+            <input type="text" id="surname" placeholder="Priezvisko" required>
+        </div>
+
+        <div class="check-date">
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Email" required>
+        </div>
+
+        <button type="submit">Odoslať</button>
+    </form>
+
+    <div id="result-message" style="margin-top: 10px;"></div>
+  </div>
+</div>
                     </div>
                 </div>
             </div>
