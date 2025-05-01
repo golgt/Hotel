@@ -3,7 +3,7 @@ namespace reviews;                            //zvolenie namespace pre triedu
 use PDOException;
 use PDO;
 require_once ('../db/config.php');                //konfiguračný súbor s info o db
-
+session_start();
 class Review{
     private $conn;                  
 
@@ -25,23 +25,42 @@ class Review{
         }
     }
     public function ulozitSpravu($roomId, $name, $email, $rating, $comment){
-        $sql = "INSERT INTO reviews (room_id, name, email, rating, comment) VALUES (:room_id, :name, :email, :rating, :comment)";
+        $sql = "INSERT INTO reviews (room_id, user_id, name, email, rating, comment) 
+        VALUES (:room_id, :user_id, :name, :email, :rating, :comment)";
+    
         $statement = $this->conn->prepare($sql);
     
         try {
-            $statement->execute([
-                ':room_id' => $roomId,
-                ':name' => $name,
-                ':email' => $email,
-                ':rating' => $rating,
-                ':comment' => $comment
-            ]);
+            // Získame user_id priamo z $_SESSION
+            $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+    
+            // Ak nie je prihlásený používateľ, ulož recenziu bez user_id
+            if ($userId === null) {
+                $statement->execute([
+                    ':room_id' => $roomId,
+                    ':user_id' => null, // Ak používateľ nie je prihlásený, môžeš nastaviť null
+                    ':name' => $name,
+                    ':email' => $email,
+                    ':rating' => $rating,
+                    ':comment' => $comment
+                ]);
+            } else {
+                $statement->execute([
+                    ':room_id' => $roomId,
+                    ':user_id' => $userId, // Použijeme prihláseného používateľa
+                    ':name' => $name,
+                    ':email' => $email,
+                    ':rating' => $rating,
+                    ':comment' => $comment
+                ]);
+            }
+    
             return true;
-        } catch(\Exception $e){
+        } catch (\Exception $e) {
             return false;
         }
-    
     }
+    
     public function __destruct(){                   //deštruktor zatvára pripojenie nastavenim vlastnosti $conn na null 
         $this->conn = null;                     
     }

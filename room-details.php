@@ -62,7 +62,14 @@ if (isset($_SESSION['user_id'])) {
     $room = new Room($row);
 
     // Načítanie recenzií pre túto izbu
-    $stmt = $pdo->prepare("SELECT * FROM reviews WHERE room_id = ? ORDER BY created_at DESC");
+    $stmt = $pdo->prepare("
+    SELECT reviews.*, users.gender 
+    FROM reviews 
+    JOIN users ON reviews.user_id = users.id 
+    WHERE room_id = ? 
+    ORDER BY created_at DESC
+");
+
     $stmt->execute([$id]);
     $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
     ?>
@@ -89,46 +96,47 @@ if (isset($_SESSION['user_id'])) {
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <div class="rd-reviews">
-                        <h4>Recenzie</h4>
+                <div class="rd-reviews">
+                    <h4>Recenzie</h4>
                         <?php if (count($reviews) > 0): ?>
-                            <?php foreach ($reviews as $review): ?>                      <!--prehladava databazu s recenizami a nasledne ich vypise aj s datumom a hodnotenim-->
-                                <div class="review-item">
-                                    <div class="ri-pic">
-                                        <?php
-                                        // Kontrola pohlavia
-                                        if($user && isset($user['gender']) && $user['gender'] === 'female') {
-                                            $defaultImage = 'img/room/avatar/avatar-2.jpg'; // Obrázok pre ženy
-                                        } else {
-                                            $defaultImage = "img/room/avatar/avatar-1.jpg"; // Obrázok pre mužov
+                            <?php foreach ($reviews as $review): ?>
+                            <div class="review-item">
+                                <div class="ri-pic">
+                                    <?php
+                                         // Pevné nastavenie obrázka podľa pohlavia recenzenta
+                                         if ($review['gender'] === 'female') {
+                                            // Obrázok pre ženu
+                                            $profileImage = 'img/room/avatar/avatar-2.jpg'; 
+                                         } else {
+                                            // Obrázok pre muža (alebo nešpecifikované pohlavie)
+                                            $profileImage = 'img/room/avatar/avatar-1.jpg';
+                                         }
+                                     ?>
+                                    <img src="<?= htmlspecialchars($profileImage) ?>" alt="Profile Picture">
+                                </div>
+                                <div class="ri-text">
+                                    <span><?= htmlspecialchars($review['created_at']); ?></span>
+                                        <div class="rating">
+                                        <?php 
+                                        // Zobrazenie hodnotenia ako hviezdičky
+                                        for ($i = 0; $i < 5; $i++) {
+                                            if ($i < $review['rating']) {
+                                                echo '<i class="icon_star"></i>';
+                                            } else {
+                                                echo '<i class="icon_star-half_alt"></i>';
+                                            }
                                         }
                                         ?>
-                                        <img src="<?= htmlspecialchars($defaultImage) ?>" alt="">
-                                    </div>
-                                    <div class="ri-text">
-                                        <span><?= htmlspecialchars($review['created_at']); ?></span>
-                                        <div class="rating">
-                                            <?php 
-                                            // Zobrazenie hodnotenia ako hviezdičky
-                                            for ($i = 0; $i < 5; $i++) {
-                                                if ($i < $review['rating']) {
-                                                    echo '<i class="icon_star"></i>';
-                                                } else {
-                                                    echo '<i class="icon_star-half_alt"></i>';
-                                                }
-                                            }
-                                            ?>
-                                        </div>
-                                        <h5><?= htmlspecialchars($review['name']); ?></h5>
-                                        <p><?= htmlspecialchars($review['comment']); ?></p>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <p>Žiadne recenzie zatiaľ neboli pridané.</p>
-                        <?php endif; ?>
+                            </div>
+                            <h5><?= htmlspecialchars($review['name']); ?></h>
+                            <p><?= htmlspecialchars($review['comment']); ?></p>
+                        </div>
                     </div>
-                    
+                <?php endforeach; ?>
+                <?php else: ?>
+                    <p>Žiadne recenzie zatiaľ neboli pridané.</p>
+                <?php endif; ?>
+                </div>                   
                     <div class="review-add">
                         <h4>Pridať recenziu</h4>
 

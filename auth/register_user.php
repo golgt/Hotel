@@ -17,7 +17,7 @@ try {
     $lastname = trim($_POST['lastname'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
-    $gender = $_POST['gendewr'] ?? '';
+    $gender = $_POST['gender'] ?? 'male';
     
 
     // Validácia údajov
