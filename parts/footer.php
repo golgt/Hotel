@@ -10,7 +10,7 @@
                                     <img src="img/logoNEW.png" alt="">
                                 </a>
                             </div>
-                            <p>We inspire and reach millions of travelers<br /> across 90 local websites</p>
+                            <p>Pobyt ako v rozprávke<br /> na jedinečnom mieste</p>
                             <div class="fa-social">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
                                 <a href="#"><i class="fa fa-twitter"></i></a>
@@ -22,18 +22,18 @@
                     </div>
                     <div class="col-lg-3 offset-lg-1">
                         <div class="ft-contact">
-                            <h6>Contact Us</h6>
+                            <h6>Kontaktujte nás</h6>
                             <ul>
                                 <li>(12) 345 67890</li>
-                                <li>info.colorlib@gmail.com</li>
-                                <li>856 Cordia Extension Apt. 356, Lake, United State</li>
+                                <li>martin.ovcarcik@student.ukf.sk</li>
+                                <li>Trieda Andreja Hlinku 603/1, 949 74 Nitra-Chrenová</li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-3 offset-lg-1">
                         <div class="ft-newslatter">
-                            <h6>New latest</h6>
-                            <p>Get the latest updates and offers.</p>
+                            <h6>Novinky</h6>
+                            <p>Dostávajte správy o nových ponukach a akciách.</p>
                             <form action="#" class="fn-form">
                                 <input type="text" placeholder="Email">
                                 <button type="submit"><i class="fa fa-send"></i></button>

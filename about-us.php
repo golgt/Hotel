@@ -64,14 +64,14 @@
                     <div class="col-md-4">
                         <div class="ap-service-item set-bg" data-setbg="img/about/about-p2.jpg">
                             <div class="api-text">
-                                <h3>Cestovanie & Camping</h3>
+                                <h3>Cestovanie & Kempovanie</h3>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="ap-service-item set-bg" data-setbg="img/about/about-p3.jpg">
                             <div class="api-text">
-                                <h3>Event & Party</h3>
+                                <h3>Eventy & Party</h3>
                             </div>
                         </div>
                     </div>

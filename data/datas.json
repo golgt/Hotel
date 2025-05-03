@@ -16,7 +16,7 @@
             "submenu": []
         },
         {
-            "name": "Novinky",
+            "name": "Blog",
             "url": "./blog.php",
             "submenu": []
         },
