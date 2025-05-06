@@ -1,11 +1,14 @@
 <?php include_once "parts/header.php";
+include_once "classes/Reservation.php";
+include_once "classes/Payment.php";
+
     session_start();
     $pdo = new PDO("mysql:host=localhost;dbname=hotel_u_ovesky;charset=utf8", "root", "", [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
     ]);
     
     // Načítanie izieb
-    $stmt = $pdo->prepare("SELECT id, name, capacity FROM rooms");
+    $stmt = $pdo->prepare("SELECT id, name, capacity, price FROM rooms");
     $stmt->execute();
     $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -31,64 +34,61 @@
                 </div>
                 <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                     <div class="booking-form">
-                    <div class="room-booking">
-    <div class="container">
-    <h3>Zarezervujte si hotel</h3>
-    <form id="reservation-form">
-        
-        <!-- Výber izby -->
-        <div class="check-date">
-            <label for="room-select">Izba:</label>
-            <select id="room-select" name="room_id" required>
-                <option value="">-- Vyber izbu --</option>
-                <?php foreach ($rooms as $room): ?>
-                    <option value="<?= $room['id'] ?>" data-capacity="<?= intval(preg_replace('/\D/', '', $room['capacity'])) ?>">
-                        <?= htmlspecialchars($room['name']) ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
-        </div>
-        <br>
-        <br>
-        <!-- Dátumy -->
-        <div class="check-date">
-            <label for="check-in">Check In:</label>
-            <input type="date" id="check-in" required>
-            
-        </div>
-        <div class="check-date">
-            <label for="check-out">Check Out:</label>
-            <input type="date" id="check-out"  required>
-            
-        </div>
+                        <div class="room-booking">
+                            <div class="container">
+                                <h3>Zarezervujte si hotel</h3>
+                                <form id="reservation-form">
+                                    <!-- Výber izby -->
+                                    <div class="check-date">
+                                        <label for="room-select">Izba:</label>
+                                        <select id="room-select" name="room_id" required>
+                                            <option value="">-- Vyber izbu --</option>
+                                            <?php foreach ($rooms as $room): ?>
+                                                <option value="<?= $room['id'] ?>" data-capacity="<?= intval(preg_replace('/\D/', '', $room['capacity'])) ?>" data-price="<?= $room['price'] ?>">
+                                                    <?= htmlspecialchars($room['name']) ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <br><br>
 
-        <!-- Počet osôb -->
-        <div class="check-date">
-            <label for="guests">Počet osôb:</label>
-            <input type="numbre" id="guests"  placeholder="Počet osôb" required>
-        </div>
-        <!-- Osobné údaje -->
-        <div class="check-date">
-            <label for="name">Meno:</label>
-            <input type="text" id="name" placeholder="Meno" required>
-        </div>
+                                    <!-- Dátumy -->
+                                    <div class="check-date">
+                                        <label for="check-in">Check In:</label>
+                                        <input type="date" id="check-in" name="check_in" required>
+                                    </div>
+                                    <div class="check-date">
+                                        <label for="check-out">Check Out:</label>
+                                        <input type="date" id="check-out" name="check_out" required>
+                                    </div>
 
-        <div class="check-date">
-            <label for="surname">Priezvisko:</label>
-            <input type="text" id="surname" placeholder="Priezvisko" required>
-        </div>
+                                    <!-- Počet osôb -->
+                                    <div class="check-date">
+                                        <label for="guests">Počet osôb:</label>
+                                        <input type="number" id="guests" name="guests" placeholder="Počet osôb" required>
+                                    </div>
 
-        <div class="check-date">
-            <label for="email">Email:</label>
-            <input type="email" id="email" placeholder="Email" required>
-        </div>
+                                    <!-- Osobné údaje -->
+                                    <div class="check-date">
+                                        <label for="name">Meno:</label>
+                                        <input type="text" id="name" name="name" placeholder="Meno" required>
+                                    </div>
 
-        <button type="submit">Odoslať</button>
-    </form>
+                                    <div class="check-date">
+                                        <label for="surname">Priezvisko:</label>
+                                        <input type="text" id="surname" name="surname" placeholder="Priezvisko" required>
+                                    </div>
 
-    <div id="result-message" style="margin-top: 10px;"></div>
-  </div>
-</div>
+                                    <div class="check-date">
+                                        <label for="email">Email:</label>
+                                        <input type="email" id="email" name="email" placeholder="Email" required>
+                                    </div>
+
+                                    <button id="open-payment-modal">Platba</button>
+                                </form>
+                                <div id="result-message" style="margin-top: 10px;"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -293,6 +293,7 @@
     <script src="js/jquery.slicknav.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>

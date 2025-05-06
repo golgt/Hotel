@@ -24,7 +24,7 @@ include 'functions.php';
                 </ul>
             </div>
         </div>
-        <a href="#" class="bk-btn">Rezervujte teraz</a>
+        <a href="./reservations.php" class="bk-btn">Rezervujte teraz</a>
     </div>
     
     <nav class="mainmenu mobile-menu">

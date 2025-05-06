@@ -7,16 +7,16 @@ try {
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
     ]);
 
-    //databáza z formulára
+    // Dáta z formulára
     $roomId = $_POST['room_id'];
     $checkIn = $_POST['check_in'];
     $checkOut = $_POST['check_out'];
-    $guests = $_POST['guests'];
-    $name = $_POST['name'];
-    $surname = $_POST['surname'];
-    $email = $_POST['email'];
+    $guests = (int) $_POST['guests'];
+    $name = trim($_POST['name']);
+    $surname = trim($_POST['surname']);
+    $email = trim($_POST['email']);
 
-    // Validácia
+    // Validácia prázdnych polí
     if (empty($roomId) || empty($checkIn) || empty($checkOut) || empty($guests) || empty($name) || empty($surname) || empty($email)) {
         echo json_encode([
             'success' => false,
@@ -24,22 +24,66 @@ try {
         ]);
         exit;
     }
-    //prevod dátumov pre výpočet bodov
+
+    // Validácia emailu
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Neplatná e-mailová adresa.'
+        ]);
+        exit;
+    }
+
+    // Validácia počtu hostí
+    if ($guests <= 0) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Neplatný počet osôb.'
+        ]);
+        exit;
+    }
+
+    // Prevod a kontrola dátumov
     $checkInDate = new DateTime($checkIn);
     $checkOutDate = new DateTime($checkOut);
+    if ($checkInDate >= $checkOutDate) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Dátum odchodu musí byť po dátume príchodu.'
+        ]);
+        exit;
+    }
+
     $nights = $checkInDate->diff($checkOutDate)->days;
 
+    // Načítaj cenu izby
+    $stmt = $pdo->prepare("SELECT price FROM rooms WHERE id = ?");
+    $stmt->execute([$roomId]);
+    $room = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$room) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Izba sa nenašla.'
+        ]);
+        exit;
+    }
+
+    $pricePerNight = $room['price'];
+    $totalPrice = $nights * $pricePerNight;
+
+    // Začiatok transakcie
     $pdo->beginTransaction();
-    //vloženie rezervácie
+
+    // Uloženie rezervácie
     $stmt = $pdo->prepare("INSERT INTO reservations (name, surname, email, guests, room_id, start_date, end_date, created_at)
                            VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
-
     $stmt->execute([$name, $surname, $email, $guests, $roomId, $checkIn, $checkOut]);
 
-    $successMessage = 'Rezervácia bola úspešne uložená!';
+    $successMessage = "Rezervácia bola úspešne uložená! Celková cena: $totalPrice €.";
 
-    //ak je užívatel prihlásený pripočítajú sa body
-    if(isset($_SESSION['user_id'])){
+    // Vernostné body
+    if (isset($_SESSION['user_id'])) {
         $userId = $_SESSION['user_id'];
         $pointsToAdd = $nights * 10;
 
@@ -48,7 +92,8 @@ try {
 
         $successMessage .= " Získali ste $pointsToAdd vernostných bodov.";
     }
-    //potvrdenie transakcie
+
+    // Potvrdenie transakcie
     $pdo->commit();
 
     echo json_encode([
@@ -57,8 +102,7 @@ try {
     ]);
 
 } catch (Exception $e) {
-    //zrušenie transakcie v prípade chyby
-    if($pdo->inTransaction()){
+    if ($pdo->inTransaction()) {
         $pdo->rollBack();
     }
     echo json_encode([

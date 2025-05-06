@@ -2,9 +2,6 @@
 session_start();
 require_once 'db/config.php';
 
-// Debug výpis
-echo "Session ID: " . (isset($_SESSION['user_id']) ? $_SESSION['user_id'] : "Nie je nastavené") . "<br>";
-
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php?error=Musíte sa prihlásiť");
     exit();
