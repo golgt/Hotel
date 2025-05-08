@@ -1,6 +1,4 @@
 <?php include_once "parts/header.php";
-include_once "classes/Reservation.php";
-include_once "classes/Payment.php";
 
     session_start();
     $pdo = new PDO("mysql:host=localhost;dbname=hotel_u_ovesky;charset=utf8", "root", "", [

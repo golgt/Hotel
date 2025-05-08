@@ -15,6 +15,7 @@ try {
     $name = trim($_POST['name']);
     $surname = trim($_POST['surname']);
     $email = trim($_POST['email']);
+    $discountValue = isset($_POST['discount_value']) ? (float) $_POST['discount_value'] : 0;
 
     // Validácia prázdnych polí
     if (empty($roomId) || empty($checkIn) || empty($checkOut) || empty($guests) || empty($name) || empty($surname) || empty($email)) {
@@ -71,21 +72,23 @@ try {
 
     $pricePerNight = $room['price'];
     $totalPrice = $nights * $pricePerNight;
-
+   
     // Začiatok transakcie
     $pdo->beginTransaction();
 
-    // Uloženie rezervácie
-    $stmt = $pdo->prepare("INSERT INTO reservations (name, surname, email, guests, room_id, start_date, end_date, created_at)
-                           VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
-    $stmt->execute([$name, $surname, $email, $guests, $roomId, $checkIn, $checkOut]);
+    
+    // Uloženie rezervácie s cenou
+    $stmt = $pdo->prepare("INSERT INTO reservations (name, surname, email, guests, room_id, start_date, end_date, total_price, discount_value, created_at)
+                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");
+    $stmt->execute([$name, $surname, $email, $guests, $roomId, $checkIn, $checkOut, $totalPrice, $discountValue]);
+
 
     $successMessage = "Rezervácia bola úspešne uložená! Celková cena: $totalPrice €.";
 
     // Vernostné body
     if (isset($_SESSION['user_id'])) {
         $userId = $_SESSION['user_id'];
-        $pointsToAdd = $nights * 10;
+        $pointsToAdd = $nights * 5;
 
         $updatePoints = $pdo->prepare("UPDATE users SET loyalty_points = loyalty_points + ? WHERE id = ?");
         $updatePoints->execute([$pointsToAdd, $userId]);
