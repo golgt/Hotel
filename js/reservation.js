@@ -53,8 +53,21 @@ document.getElementById('confirm-payment').addEventListener('click', function ()
     const email = document.getElementById('email').value;
     const paymentMethod = document.querySelector('input[name="payment"]:checked')?.value || 'reception';
     const rawPoints = parseInt(document.getElementById('points-slider')?.value || 0, 10);
-    const discountValue = rawPoints / 10; // Prevod bodov na €
+    const pointsDiscount = rawPoints * 0.1;
 
+    // Spočítame maximálnu povolenú zľavu (napr. 25 % z ceny)
+    const selectedRoom = document.getElementById('room-select').options[document.getElementById('room-select').selectedIndex];
+    const roomPrice = selectedRoom ? parseFloat(selectedRoom.getAttribute('data-price')) || 0 : 0;
+    const checkInDate = new Date(document.getElementById('check-in').value);
+    const checkOutDate = new Date(document.getElementById('check-out').value);
+    const nights = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
+    const fullPrice = roomPrice * nights;
+
+    const maxDiscount = fullPrice * 0.25; // 25 % z ceny
+    const finalDiscount = Math.min(pointsDiscount, maxDiscount);
+
+    // Získame len toľko bodov, koľko treba na max zľavu
+    const finalPointsUsed = Math.floor(finalDiscount / 0.1); // späť na body (1 bod = 0.10 €)
 
     const formData = new URLSearchParams();
     formData.append('room_id', roomId);
@@ -65,29 +78,29 @@ document.getElementById('confirm-payment').addEventListener('click', function ()
     formData.append('surname', surname);
     formData.append('email', email);
     formData.append('payment_method', paymentMethod);
-    formData.append('discount_value', discountValue);
-
-    fetch('db/make_reservation.php', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: formData
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.success) {
-            alert(data.message);
-            document.getElementById('payment-modal').style.display = 'none';
-            document.getElementById('reservation-form').reset();
-        } else {
-            alert(data.message);
-        }
-    })
-    .catch(err => {
-        console.error(err);
-        alert('Chyba pri odosielaní rezervácie.');
+    formData.append('discount_value', finalDiscount.toFixed(2));
+    
+        fetch('db/make_reservation.php', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById('payment-modal').style.display = 'flex';
+                document.getElementById('reservation-form').reset();
+    
+                // Zavoláme po úspešnej rezervácii
+                showThankYouMessage();
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            alert('Chyba pri odosielaní rezervácie.');
+        });
     });
-});
-
+    
 document.getElementById('confirm-payment2').addEventListener('click', function () {
     const roomId = document.getElementById('room-select').value;
     const checkIn = document.getElementById('check-in').value;
@@ -100,7 +113,6 @@ document.getElementById('confirm-payment2').addEventListener('click', function (
     const rawPoints = parseInt(document.getElementById('points-slider')?.value || 0, 10);
     const discountValue = rawPoints / 10; // Prevod bodov na €
 
-
     const formData = new URLSearchParams();
     formData.append('room_id', roomId);
     formData.append('check_in', checkIn);
@@ -112,27 +124,27 @@ document.getElementById('confirm-payment2').addEventListener('click', function (
     formData.append('payment_method', paymentMethod);
     formData.append('discount_value', discountValue);
 
-    fetch('db/make_reservation.php', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: formData
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.success) {
-            alert(data.message);
-            document.getElementById('payment-modal').style.display = 'none';
-            document.getElementById('reservation-form').reset();
-        } else {
-            alert(data.message);
-        }
-    })
-    .catch(err => {
-        console.error(err);
-        alert('Chyba pri odosielaní rezervácie.');
+        fetch('db/make_reservation.php', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById('payment-modal').style.display = 'flex';
+                document.getElementById('reservation-form').reset();
+    
+                // Zavoláme po úspešnej rezervácii
+                showThankYouMessage();
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            alert('Chyba pri odosielaní rezervácie.');
+        });
     });
-});
-
+    
 // Vernostné body
 const useAllPointsCheckbox = document.getElementById('use-all-points');
 const pointsSlider = document.getElementById('points-slider');
@@ -151,6 +163,8 @@ pointsSlider?.addEventListener('input', () => {
     const discount = (points * 0.1).toFixed(2);
     pointsValueLabel.textContent = `${points} bodov`;
     discountValue.textContent = `${discount} €`;
+
+    updatePrice();
 });
 
 // Prepnúť spôsob platby
@@ -183,19 +197,9 @@ function showThankYouMessage() {
     document.querySelector('.payment-options')?.style.setProperty('display', 'none');
     
     // Zobrazíme ďakovnú správu
-    document.getElementById('thank-you-message').style.display = 'block';
+    const thankYou = document.getElementById('thank-you-message');
+    thankYou.style.display = 'block'; // alebo 'flex' ak máš flexbox
 }
-
-
-// Platba pri recepcii
-document.getElementById('confirm-payment')?.addEventListener('click', function () {
-    showThankYouMessage();
-});
-
-// Platba kartou
-document.querySelector('#card-payment-form button[type="button"]')?.addEventListener('click', function () {
-    showThankYouMessage();
-});
 
 // Dokončiť poďakovanie
 document.getElementById('finish-order-btn')?.addEventListener('click', function () {
@@ -208,25 +212,34 @@ document.getElementById('finish-order-btn')?.addEventListener('click', function 
 });
 // Funkcia na aktualizáciu ceny
 function updatePrice() {
-    // Získame vybranú izbu a cenu
     const roomSelect = document.getElementById('room-select');
     const finalPriceElement = document.getElementById('final-price');
     const selectedRoom = roomSelect.options[roomSelect.selectedIndex];
-    
-    // Skontrolujeme, či je vybraná izba a získame jej cenu
     const roomPrice = selectedRoom ? parseFloat(selectedRoom.getAttribute('data-price')) || 0 : 0;
-    const guests = document.getElementById('guests').value;
 
-    // Debug: Zobraziť cenu izby a počet osôb
-    console.log("Room Price: " + roomPrice);
-    console.log("Guests: " + guests);
+    const checkInDate = new Date(document.getElementById('check-in').value);
+    const checkOutDate = new Date(document.getElementById('check-out').value);
 
-    // Ak je vybraná izba a počet osôb, vypočíta cenu
-    if (roomPrice > 0 && guests > 0) {
-        const totalPrice = roomPrice * guests; // Vypočíta cenu na základe počtu osôb
-        finalPriceElement.innerText = `Celková cena: €${totalPrice.toFixed(2)}`;
+    // Vypočítame počet nocí
+    const timeDiff = checkOutDate - checkInDate;
+    const nights = timeDiff > 0 ? timeDiff / (1000 * 60 * 60 * 24) : 0;
+
+    // Získame body (ak slider existuje)
+    const usePoints = document.getElementById('use-all-points')?.checked;
+    const points = usePoints ? parseInt(document.getElementById('points-slider')?.value || '0', 10) : 0;
+    const discount = points * 0.1; // Každý bod má hodnotu 0.1 €
+
+    if (roomPrice > 0 && nights > 0) {
+        let totalPrice = roomPrice * nights;
+
+        // Aplikuj zľavu, max 25 % z celkovej ceny
+        const maxDiscount = totalPrice * 0.25;
+        const finalDiscount = Math.min(discount, maxDiscount);
+        totalPrice -= finalDiscount;
+
+        finalPriceElement.innerText = `Celková cena: €${totalPrice.toFixed(2)} (so zľavou €${finalDiscount.toFixed(2)})`;
     } else {
-        finalPriceElement.innerText = '0.00 €'; // Ak nie je vybraná izba alebo počet osôb
+        finalPriceElement.innerText = '0.00 €';
     }
 }
 
@@ -238,7 +251,3 @@ document.getElementById('guests').addEventListener('input', updatePrice);
 
 // Inicializácia ceny pri načítaní stránky (prvý výber)
 updatePrice();
-
-
-
-

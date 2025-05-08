@@ -89,13 +89,24 @@ try {
     if (isset($_SESSION['user_id'])) {
         $userId = $_SESSION['user_id'];
         $pointsToAdd = $nights * 5;
-
-        $updatePoints = $pdo->prepare("UPDATE users SET loyalty_points = loyalty_points + ? WHERE id = ?");
-        $updatePoints->execute([$pointsToAdd, $userId]);
-
+    
+        // Odpočítať použité body
+        $usedPoints = isset($_POST['used_points']) ? intval($_POST['used_points']) : 0;
+    
+        // Aktualizuj body (pridaj nové, odpočítaj použité)
+        $updatePoints = $pdo->prepare("
+            UPDATE users 
+            SET loyalty_points = GREATEST(loyalty_points - ?, 0) + ? 
+            WHERE id = ?
+        ");
+        $updatePoints->execute([$usedPoints, $pointsToAdd, $userId]);
+    
         $successMessage .= " Získali ste $pointsToAdd vernostných bodov.";
+        if ($usedPoints > 0) {
+            $successMessage .= " Použili ste $usedPoints bodov na zľavu.";
+        }
     }
-
+    
     // Potvrdenie transakcie
     $pdo->commit();
 

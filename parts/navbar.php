@@ -71,11 +71,11 @@ include 'functions.php';
                             <a href="login.php" class="bk-btn">Prihlásenie</a>
                         <?php endif; ?>
                         <div class="language-option">
-                            <img src="img/flag.jpg" alt="">
+                            <img src="img/Flag_of_Slovakia.svg.png" alt="">
                             <span>SK <i class="fa fa-angle-down"></i></span>
                             <div class="flag-dropdown">
                                 <ul>
-                                    <li><a href="#">EN</a></li>
+                                    <li><a href="#">EN  </a><img src="img/flag.jpg" alt=""></li>
                                 </ul>
                             </div>
                         </div>
