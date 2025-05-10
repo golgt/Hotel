@@ -1,0 +1,39 @@
+{
+    "menu":[
+        {
+            "name": "Domov",
+            "url": "./index.php",
+            "submenu": []
+        },
+        {
+            "name": "Izby",
+            "url": "./rooms.php",
+            "submenu": [] 
+        },
+        {
+            "name": "O nás",
+            "url": "./about-us.php",
+            "submenu": []
+        },
+        {
+            "name": "Stránky",
+            "url": "#",
+            "submenu": [
+                {"name": "Detaily izby", "url": "./room-details.php"},
+                {"name": "Blog detaily", "url": "./blog-details.php"},
+                {"name": "Rodinná izba", "url": "#"},
+                {"name": "Prémiová izba", "url": "#"}
+            ]
+        },
+        {
+            "name": "Novinky",
+            "url": "./blog.php",
+            "submenu": []
+        },
+        {
+            "name": "Kontakt",
+            "url": "./contact.php",
+            "submenu": []
+        }
+    ]
+}
