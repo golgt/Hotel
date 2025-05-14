@@ -29,7 +29,7 @@ $userLoggedIn = isset($_SESSION['user_id']);
                     <div class="hero-text">
                         <h1>U Ovečky luxus ako nikde inde</h1>
                         <p>Nachádzajú sa tu najlepšie ponuky izieb rovnako aj typy na výlety v blízkom okolí ale aj v zahraničí.</p>
-                        <a href="rooms.php" class="primary-btn">Discover Now</a>
+                        <a href="rooms.php" class="primary-btn">Zistiť viac</a>
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">

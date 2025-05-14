@@ -36,10 +36,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2>Our Rooms</h2>
+                        <h2>Naše Izby</h2>
                         <div class="bt-option">
-                            <a href="index.php">Home</a>
-                            <span>Rooms</span>
+                            <a href="index.php">Domov</a>
+                            <span>Izby</span>
                         </div>
                     </div>
                 </div>
