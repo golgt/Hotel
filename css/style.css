@@ -1519,6 +1519,28 @@ ul, ol {
 	height: 46px;
 	margin-top: 30px;
 }
+
+/*vyber hodnotenia izby*/
+.rating{
+	direction: rtl;
+	display: flex;
+	justify-content: flex-start;
+	gap: 5px;
+}
+.rating input{
+	display: none;
+}
+.rating label{
+	font-size: 2rem;
+	color: #ccc;
+	cursor: pointer;
+	transition: color 0.3s;
+}
+.rating input:checked ~ label,
+.rating label:hover,
+.rating label:hover ~ label{
+	color: gold;
+}
 /*---------------------
   Blog Section
 -----------------------*/

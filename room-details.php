@@ -154,13 +154,22 @@ if (isset($_SESSION['user_id'])) {
                             <div class="col-lg-12">
                                 <div>
                                     <h5>Vaše hodnotenie:</h5>
-                                    <select name="rating" required>
-                                        <option value="5">★★★★★</option>
-                                        <option value="4">★★★★☆</option>
-                                        <option value="3">★★★☆☆</option>
-                                        <option value="2">★★☆☆☆</option>
-                                        <option value="1">★☆☆☆☆</option>
-                                    </select>
+                                    <div class="rating">
+                                        <input type="radio" name="rating" id="star5" value="5">
+                                        <label for="star5">★</label>
+                                        
+                                        <input type="radio" name="rating" id="star4" value="4">
+                                        <label for="star4">★</label>
+
+                                        <input type="radio" name="rating" id="star3" value="3">
+                                        <label for="star3">★</label>
+
+                                        <input type="radio" name="rating" id="star2" value="2">
+                                        <label for="star2">★</label>
+
+                                        <input type="radio" name="rating" id="star1" value="1">
+                                        <label for="star1">★</label>
+                                    </div>
                                 </div>
                                 <textarea name="comment" placeholder="Vaša recenzia" required></textarea>
                                 <button type="submit">Odoslať</button>

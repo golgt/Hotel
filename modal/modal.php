@@ -22,7 +22,7 @@
                 <span><?= $userPoints ?> bodov</span>
             </div>
             <div style="margin-top: 10px;">
-                <p>Zľava: <span id="discount-value">0.00</span> €</p>
+                <p>Zľava: <span id="discount-value">0.00</span> </p>
             </div>
         </div>
     </div>
