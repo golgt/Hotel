@@ -88,7 +88,7 @@
                 <div class="col-lg-12">
                     <div class="video-text">
                         <h2>Objavte Náš Hotel & Služby</h2>
-                        <p>Hotel Tour</p>
+                        <p>Šéfkuchárov odkaz</p>
                         <a href=https://www.youtube.com/watch?v=V2LpXOKWjus class="play-btn video-popup"><img
                                 src="img/play.png" alt=""></a>
                     </div>
