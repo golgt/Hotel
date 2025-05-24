@@ -129,7 +129,7 @@ include_once "modal/modal.php";
                             <span>O nás</span>
                             <h2>Hotel<br /> v krásnych Alpách</h2>
                         </div>
-                        <p class="f-para">U Ovečky je novovytvorený hotelový rezort ktorý ponúka veľa luxusných služieb a pohodlné ubytovanie. Máme profesionálne 
+                        <p class="f-para">U Ovečky je tradičný hotelový rezort ktorý ponúka veľa luxusných služieb a pohodlné ubytovanie. Máme profesionálne 
                             vzškolených zamestnancov ktorý sa postarajú o Vaše pohodlie.
                         </p>
                         <p class="s-para">Takže pokiaľ ide o rezerváciu dokonalého hotela, 
