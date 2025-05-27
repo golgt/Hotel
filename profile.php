@@ -1,18 +1,15 @@
 <?php
 session_start();
 require_once 'db/config.php';
+require_once "classes/Database.php";
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php?error=Musíte sa prihlásiť");
     exit();
 }
 
-try {
-    // Pripojenie k databáze
-    $pdo = new PDO("mysql:host=" . DATABASE['HOST'] . ";dbname=" . DATABASE['DBNAME'] . ";port=" . DATABASE['PORT'], DATABASE['USER_NAME'], DATABASE['PASSWORD'], [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-    ]);
+$db = new Database();
+$pdo = $db->getConnection();
 
     // Získanie údajov o používateľovi
     $stmt = $pdo->prepare("SELECT name, lastname, email, loyalty_points FROM users WHERE id = :id");
@@ -26,10 +23,7 @@ try {
         header("Location: login.php?error=Používateľ neexistuje. Prihláste sa znovu.");
         exit();
     }
-} catch (PDOException $e) {
-    echo "Chyba databázy: " . $e->getMessage();
-    exit();
-}
+
 $email = $user['email']; // e-mail prihláseného používateľa
 
 $stmt = $pdo->prepare("

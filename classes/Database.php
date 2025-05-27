@@ -1,6 +1,6 @@
 <?php
 
-require_once("../db/config.php");
+require_once __DIR__ . "/../db/config.php";
 
 /**
  * Trieda Database pre správu pripojenia k databáze
@@ -9,17 +9,10 @@ class Database{
 
     private PDO $conn;
 
-    /**
-     * Konštruktor triedy - automaticky vytvorí pripojenie k databáze
-     */
     public function __construct(){
         $this->connect();
     }
 
-    /**
-     * Privátna metóda pre vytvorenie pripojenia k databáze
-     * Nastavuje PDO atribúty pre lepšiu prácu s chybami a formátom výsledkov
-     */
     private function connect(){                        
         $config = DATABASE;
 
@@ -31,7 +24,7 @@ class Database{
 
         try{
             // Vytvorenie PDO pripojenia s nastavenými parametrami
-            $this->conn = new PDO('mysql:hosts=' . $config['HOST'] . ';dbname=' .$config['DBNAME'] . ';port=' . $config['PORT'], 
+            $this->conn = new PDO('mysql:host=' . $config['HOST'] . ';dbname=' .$config['DBNAME'] . ';port=' . $config['PORT'], 
                                  $config['USER_NAME'], 
                                  $config['PASSWORD'], 
                                  $options);
@@ -39,11 +32,6 @@ class Database{
             die("Chyba pripojenia: " . $e->getMessage());
         }
     }
-
-    /**
-     * Metóda pre získanie aktívneho pripojenia k databáze
-     * @return PDO Aktívne pripojenie k databáze
-     */
     public function getConnection(): PDO{
         return $this->conn;
     }

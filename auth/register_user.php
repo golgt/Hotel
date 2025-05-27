@@ -1,5 +1,5 @@
 <?php 
-// Spustenie session pre sledovanie prihláseného používateľa
+
 session_start();
 // Nastavenie kódovania pre správne zobrazenie diakritiky
 header('Content-type: text/html; charset=utf-8');

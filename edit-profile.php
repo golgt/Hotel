@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'db/config.php';
+require_once "classes/Database.php";
 
 // Ak nie je používateľ prihlásený, presmeruj na prihlásenie
 if (!isset($_SESSION['user_id'])) {
@@ -8,24 +9,19 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-try {
-    // Pripojenie k databáze
-    $pdo = new PDO("mysql:host=" . DATABASE['HOST'] . ";dbname=" . DATABASE['DBNAME'] . ";port=" . DATABASE['PORT'], DATABASE['USER_NAME'], DATABASE['PASSWORD'], [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-    ]);
+$db = new Database();
+$pdo = $db->getConnection();
 
-    // Získanie aktuálnych údajov používateľa
-    $stmt = $pdo->prepare("SELECT name, lastname, email, loyalty_points FROM users WHERE id = :id");
-    $stmt->execute([':id' => $_SESSION['user_id']]);
-    $user = $stmt->fetch();
+// Načítaj údaje o používateľovi podľa ID zo session
+$userId = $_SESSION['user_id'];
+$stmt = $pdo->prepare("SELECT name, lastname, email FROM users WHERE id = :id LIMIT 1");
+$stmt->execute([':id' => $userId]);
+$user = $stmt->fetch();
 
-    if (!$user) {
-        echo "Používateľ neexistuje";
-        exit();
-    }
-} catch (PDOException $e) {
-    echo "Chyba databázy: " . $e->getMessage();
+if (!$user) {
+    // Používateľ neexistuje, prípadne ho odhlás alebo presmeruj
+    session_destroy();
+    header("Location: login.php?error=Používateľ neexistuje");
     exit();
 }
 
