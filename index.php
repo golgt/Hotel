@@ -1,11 +1,11 @@
 <?php 
 session_start();
 include_once "parts/header.php";
+include_once "classes/Database.php";
 $userLoggedIn = isset($_SESSION['user_id']);
 
-    $pdo = new PDO("mysql:host=localhost;dbname=hotel_u_ovesky;charset=utf8", "root", "", [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-    ]);
+$db = new Database();
+$pdo = $db->getConnection();
     
     // Načítanie izieb
     $stmt = $pdo->prepare("SELECT id, name, capacity, price FROM rooms");

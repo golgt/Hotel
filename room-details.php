@@ -35,14 +35,11 @@ if (isset($_SESSION['user_id'])) {
 
     <?php 
     require_once "classes/Room.php";
+    require_once "classes/Database.php";
 
-    try {
-        $pdo = new PDO("mysql:host=localhost;dbname=hotel_u_ovesky;charset=utf8", "root", "", [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION  //pripojenie k databaze
-        ]);
-    } catch (PDOException $e) {
-        die("Pripojenie s databázou zlyhalo" . $e->getMessage());
-    }
+    $db = new Database();
+    $pdo = $db->getConnection();
+    
     if(!isset($_GET['id'])) {
         die("Neplatne ID izby");
     }

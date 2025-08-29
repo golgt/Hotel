@@ -1,4 +1,5 @@
 <?php include_once "parts/header.php"; 
+    include_once "classes/Database.php";
     session_start();
 ?>
 
@@ -14,13 +15,8 @@
     require_once "classes/Room.php";
 
     // DB pripojenie
-    try {
-        $pdo = new PDO("mysql:host=localhost;dbname=hotel_u_ovesky;charset=utf8", "root", "", [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-        ]);
-    } catch (PDOException $e) {
-        die("DB Connection failed: " . $e->getMessage());
-    }
+    $db = new Database();
+    $pdo = $db->getConnection();
 
     $stmt = $pdo->query("SELECT * FROM rooms");                      //načítavanie z databázy
 

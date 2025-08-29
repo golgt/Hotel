@@ -1,11 +1,12 @@
 <?php
 include_once "parts/header.php";
+include_once "classes/Database.php";
 include_once "classes/BlogManager.php";
+
 session_start();
 
-$pdo = new PDO("mysql:host=localhost;dbname=hotel_u_ovesky;charset=utf8", "root", "", [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-]);
+$db = new Database();
+$pdo = $db->getConnection();
 
 $manager = new BlogManager($pdo);
 $posts = $manager->getAllPosts();
